@@ -28,15 +28,7 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory
 		}
 
         public bool HideInWidgetList => false;
-        //      public void GetPublicViewComponent(out string viewComponentName)
-        //{
-        //	viewComponentName = "ActiveDirectoryAuthentication";
-        //}
 
-        //public void GetPublicViewComponent(string widgetZone, out string viewComponentName)
-        //{
-        //	viewComponentName = "WidgetsActiveDirectoryAuthentication";
-        //}
 
         public string GetPublicViewComponentName()
         {
@@ -73,7 +65,6 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory
 			_localizationService.AddOrUpdatePluginLocaleResource("Plugins.ExternalAuth.NovellActiveDirectory.InstantLogin.Hint", "Password-free logins", (string)null);
 			_localizationService.AddOrUpdatePluginLocaleResource("Plugins.ExternalAuth.NovellActiveDirectory.LdapError", "Cannot establish connection to active directory!", (string)null);
 			_localizationService.AddOrUpdatePluginLocaleResource("Plugins.ExternalAuth.NovellActiveDirectory.fields.LdapPath.Required", "AD path cannot be empty", (string)null);
-            //_localizationService.AddOrUpdatePluginLocaleResource("Plugins.ExternalAuth.NovellActiveDirectory.LDAPPath", "AD Pfad", "de-DE");
             
 
             _localizationService.AddOrUpdatePluginLocaleResource("Plugins.ExternalAuth.NovellActiveDirectory.SearchBase", "Search Base");

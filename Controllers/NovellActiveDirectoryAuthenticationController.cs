@@ -102,9 +102,7 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Controllers
                 LdapServerPort = novellActiveDirectorySettings.LdapServerPort,
                 UseSSL = novellActiveDirectorySettings.UseSSL,
             };
-            //configurationNovellModel.AvailableStores.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Configuration.Settings.StoreScope.AllStores"), Value = "0" });
-            //foreach (var store in _storeService.GetAllStores())
-            //    configurationNovellModel.AvailableStores.Add(new SelectListItem { Text = store.Name, Value = store.Id.ToString() });
+        
             return this.View("~/Plugins/ExternalAuth.NovellActiveDirectory/Views/Configure.cshtml", (object)configurationNovellModel);
 		}
 
@@ -160,9 +158,6 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Controllers
             {
                 throw new NopException("Novell Active Directory authentication module not configured");
             }
-            //string currentUser = base.User.Identity.Name;
-            
-            //bool flag3 = currentUser == null;
             IActionResult result2;
             if (string.IsNullOrEmpty(model.AdUserName))
             {
@@ -174,7 +169,6 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Controllers
             }
             else
             {
-                //string currentUserName = currentUser.Substring(currentUser.IndexOf("\\") + 1);
                 string email = string.Empty;
                 LdapUser ldapUser = null;
                 try
@@ -200,29 +194,6 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Controllers
                     } : null);
                 }
           
-             
-                //bool flag6 = this._ldapService.Authenticate(ldapUser.DistinguishedName, model.AdPassword);
-                //if (flag6)
-                //{
-                //    ExternalAuthenticationParameters authenticationParameters = new ExternalAuthenticationParameters
-                //    {
-                //        ProviderSystemName = "ExternalAuth.NovellActiveDirectory",
-                //        AccessToken = Guid.NewGuid().ToString(),
-                //        Email = ldapUser.Email,
-                //        ExternalIdentifier = ldapUser.Email,
-                //        ExternalDisplayIdentifier = ldapUser.Email
-                //    };
-                //    result2 = this._externalAuthenticationService.Authenticate(authenticationParameters, returnUrl);
-                //}
-                //else
-                //{
-                    
-                //    ExternalAuthorizerHelper.AddErrorsToDisplay(this._localizationService.GetResource("Plugins.ExternalAuth.NovellActiveDirectory.LdapError"));
-                //    result2 = new RedirectToActionResult("Login", "Customer", (!string.IsNullOrEmpty(returnUrl)) ? new
-                //    {
-                //        ReturnUrl = returnUrl
-                //    } : null);
-                //}
                 try
                 {
                     bool flag6 = this._ldapService.Authenticate(ldapUser.DistinguishedName, model.AdPassword);
@@ -257,111 +228,6 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Controllers
             } : null);
             return result2;
         }
-  //      [Obsolete("System.DirectoryServices.AccountManagement is not supported on this platform.")]
-  //      public IActionResult Login(string returnUrl)
-		//{
-  //          bool flag = !this._externalAuthenticationService.ExternalAuthenticationMethodIsAvailable("ExternalAuth.NovellActiveDirectory");
-  //          if (flag)
-  //          {
-  //              throw new NopException("Novell Active Directory authentication module cannot be loaded");
-  //          }
-  //          bool flag2 = string.IsNullOrEmpty(this._novellActiveDirectoryExternalAuthSettings.LdapPath);
-  //          if (flag2)
-  //          {
-  //              throw new NopException("Novell Active Directory authentication module not configured");
-  //          }
-  //          string currentUser = base.User.Identity.Name;
-  //          bool flag3 = currentUser == null;
-  //          IActionResult result2;
-  //          if (flag3)
-  //          {
-  //              ExternalAuthorizerHelper.AddErrorsToDisplay(this._localizationService.GetResource("Plugins.ExternalAuth.NovellActiveDirectory.WindowsUserNotAvailable"));
-  //              result2 = new RedirectToActionResult("Login", "Customer", (!string.IsNullOrEmpty(returnUrl)) ? new
-  //              {
-  //                  ReturnUrl = returnUrl
-  //              } : null);
-  //          }
-  //          else
-  //          {
-  //              string servername = string.Empty;
-  //              string email = string.Empty;
-  //              try
-  //              {
-  //                  bool flag4 = !string.IsNullOrEmpty(this._novellActiveDirectoryExternalAuthSettings.LdapUsername);
-  //                  if (flag4)
-  //                  {
-  //                      using (PrincipalContext context = new PrincipalContext(ContextType.Domain, this._novellActiveDirectoryExternalAuthSettings.LdapPath, this._novellActiveDirectoryExternalAuthSettings.LdapUsername, this._novellActiveDirectoryExternalAuthSettings.LdapPassword))
-  //                      {
-  //                          servername = context.ConnectedServer;
-  //                      }
-  //                  }
-  //                  else
-  //                  {
-  //                      using (PrincipalContext context2 = new PrincipalContext(ContextType.Domain, this._novellActiveDirectoryExternalAuthSettings.LdapPath))
-  //                      {
-  //                          servername = context2.ConnectedServer;
-  //                      }
-  //                  }
-  //              }
-  //              catch (Exception e)
-  //              {
-  //                  ExternalAuthorizerHelper.AddErrorsToDisplay(this._localizationService.GetResource("Plugins.ExternalAuth.NovellActiveDirectory.LdapError"));
-  //                  return new RedirectToActionResult("Login", "Customer", (!string.IsNullOrEmpty(returnUrl)) ? new
-  //                  {
-  //                      ReturnUrl = returnUrl
-  //                  } : null);
-  //              }
-  //              string filter = string.Format("(&(objectClass=user)(samaccountname={0}))", currentUser.Substring(currentUser.IndexOf("\\") + 1));
-  //              string[] propertiesToLoad = new string[]
-  //              {
-  //          "mail"
-  //              };
-  //              try
-  //              {
-  //                  using (DirectoryEntry directoryEntry = new DirectoryEntry("GC://" + servername))
-  //                  {
-  //                      using (DirectorySearcher ds = new DirectorySearcher(directoryEntry, filter, propertiesToLoad))
-  //                      {
-  //                          SearchResult result = ds.FindOne();
-  //                          bool flag5 = result != null;
-  //                          if (flag5)
-  //                          {
-  //                              email = result.Properties["mail"][0].ToString();
-  //                          }
-  //                      }
-  //                  }
-  //              }
-  //              catch (Exception)
-  //              {
-  //                  ExternalAuthorizerHelper.AddErrorsToDisplay(this._localizationService.GetResource("Plugins.ExternalAuth.NovellActiveDirectory.UserNotFound"));
-  //                  return new RedirectToActionResult("Login", "Customer", (!string.IsNullOrEmpty(returnUrl)) ? new
-  //                  {
-  //                      ReturnUrl = returnUrl
-  //                  } : null);
-  //              }
-  //              bool flag6 = string.IsNullOrEmpty(email);
-  //              if (flag6)
-  //              {
-  //                  ExternalAuthorizerHelper.AddErrorsToDisplay(this._localizationService.GetResource("Plugins.ExternalAuth.NovellActiveDirectory.MailNotFound"));
-  //                  result2 = new RedirectToActionResult("Login", "Customer", (!string.IsNullOrEmpty(returnUrl)) ? new
-  //                  {
-  //                      ReturnUrl = returnUrl
-  //                  } : null);
-  //              }
-  //              else
-  //              {
-  //                  ExternalAuthenticationParameters authenticationParameters = new ExternalAuthenticationParameters
-  //                  {
-  //                      ProviderSystemName = "ExternalAuth.NovellActiveDirectory",
-  //                      AccessToken = Guid.NewGuid().ToString(),
-  //                      Email = email,
-  //                      ExternalIdentifier = email,
-  //                      ExternalDisplayIdentifier = email
-  //                  };
-  //                  result2 = this._externalAuthenticationService.Authenticate(authenticationParameters, returnUrl);
-  //              }
-  //          }
-  //          return result2;
-  //      }
+ 
 	}
 }
