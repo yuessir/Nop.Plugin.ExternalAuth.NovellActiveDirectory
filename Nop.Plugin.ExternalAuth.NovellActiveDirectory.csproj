@@ -1,0 +1,83 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <!--Set this parameter to true to get the dlls copied from the NuGet cache to the output of your project.
+    You need to set this parameter to true if your plugin has a nuget package 
+    to ensure that the dlls copied from the NuGet cache to the output of your project-->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <AssemblyName>Nop.Plugin.ExternalAuth.NovellActiveDirectory</AssemblyName>
+    <RootNamespace>Nop.Plugin.ExternalAuth.NovellActiveDirectory</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\ExternalAuth.NovellActiveDirectory</OutputPath>
+    <OutDir>$(OutputPath)</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\Presentation\Nop.Web\Plugins\ExternalAuth.NovellActiveDirectory</OutputPath>
+    <OutDir>$(OutputPath)</OutDir>
+  </PropertyGroup>
+  <!-- This target execute after "Build" target -->
+  <!--<Target Name="NopTarget" AfterTargets="Build">
+    --><!-- Delete unnecessary libraries from plugins path --><!--
+    <MSBuild Projects="$(MSBuildProjectDirectory)\..\..\Build\ClearPluginAssemblies.proj" Properties="PluginPath=$(MSBuildProjectDirectory)\$(OutDir)" Targets="NopClear" />
+  </Target>-->
+  <ItemGroup>
+    <None Remove="Views\Configure.cshtml" />
+    <None Remove="Views\PublicInfo.cshtml" />
+    <None Remove="Views\WidgetPublicInfo.cshtml" />
+    <None Remove="Views\_ViewImports.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Configure.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\PublicInfo.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WidgetPublicInfo.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="logo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="plugin.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.1" />
+    <PackageReference Include="FluentValidation" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="2.2.0" />
+    <PackageReference Include="Novell.Directory.Ldap.NETStandard" Version="3.0.0-beta4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Nop.Core">
+      <HintPath>NopDlls\Nop.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Nop.Services">
+      <HintPath>NopDlls\Nop.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Nop.Web.Framework">
+      <HintPath>NopDlls\Nop.Web.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,122 @@
+﻿@model Nop.Plugin.ExternalAuth.NovellActiveDirectory.Models.ConfigurationNovellModel
+@{
+    Layout = "_ConfigurePlugin";
+}
+@inject Nop.Core.IWebHelper webHelper
+
+<form asp-controller="NovellActiveDirectoryAuthentication" asp-action="Configure" method="post">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            @await Component.InvokeAsync("StoreScopeConfiguration")
+            <div class="panel-body">
+                <p>
+                    To configure authentication with Active Directory follow these steps:<br />
+                    <br />
+                   
+                    1. Contact to Infrastructure team to get the more infomatiom as below.<br />
+                </p>
+        
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="LdapPath"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="LdapPath" asp-required="true"/>
+                        <span asp-validation-for="LdapPath"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="LdapServerPort"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="LdapServerPort" asp-required="true"/>
+                        <span asp-validation-for="LdapServerPort"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="LdapUsername"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="LdapUsername"/>
+                        <span asp-validation-for="LdapUsername"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="LdapPassword"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="LdapPassword"/>
+                        <span asp-validation-for="LdapPassword"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="UseInstantLogin"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="UseInstantLogin" asp-disabled="true"/>
+                        <span asp-validation-for="UseInstantLogin"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="SearchBase"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="SearchBase"/>
+                        <span asp-validation-for="SearchBase"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="ContainerName"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="ContainerName"/>
+                        <span asp-validation-for="ContainerName"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="Domain"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="Domain"/>
+                        <span asp-validation-for="Domain"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="DomainDistinguishedName"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="DomainDistinguishedName"/>
+                        <span asp-validation-for="DomainDistinguishedName"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="UseSSL"/>
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="UseSSL"/>
+                        <span asp-validation-for="UseSSL"></span>
+                    </div>
+                </div>
+         
+                <div class="form-group">
+                    <div class="col-md-9 col-md-offset-3">
+                        <input type="submit" name="save" class="btn bg-primary" value="@T("Admin.Common.Save")"/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,36 @@
+﻿@model Nop.Plugin.ExternalAuth.NovellActiveDirectory.Models.SignInViewModel
+@{
+    Layout = "";
+    Html.AddCssFileParts("~/Plugins/ExternalAuth.NovellActiveDirectory/Content/adstyles.css");
+    Html.AppendScriptParts("~/lib/jquery/jquery-1.10.2.min.js");
+}
+
+
+<form  asp-controller="NovellActiveDirectoryAuthentication" asp-action="SignIn" asp-route-returnurl="@Context.Request.Query["ReturnUrl"]" method="post">
+    <div asp-validation-summary="ModelOnly" class="message-error">@T("Account.Login.Unsuccessful")</div>
+    <div class="title">
+        <strong>AD Login</strong>
+    </div>
+    <div class="form-fields">
+        <div class="inputs">
+            <label asp-for="AdUserName" asp-postfix=":"></label>
+            <input asp-for="AdUserName" class="username" />
+            <span asp-validation-for="AdUserName"></span>
+        </div>
+
+        <div class="inputs">
+            <label asp-for="AdPassword" asp-postfix=":"></label>
+            <input asp-for="AdPassword" class="password" />
+            <span asp-validation-for="AdPassword"></span>
+        </div>
+
+    </div>
+    <div class="buttons">
+        <input class="button-1 login-button" type="submit" value="@T("AD(Windows Account) Login")" />
+    </div>
+</form>
+
+
+
+
+

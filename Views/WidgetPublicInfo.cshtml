@@ -1,0 +1,22 @@
+﻿@model bool
+@{
+    Layout = "";
+}
+@if (Model == true)
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "@(Url.Action("SignIn", "novellactivedirectoryauthentication"))",
+                error: function (xhr, ajaxOptions) {
+                    console.log(xhr.status);
+                    console.log("error");
+                },
+                success: function () {
+                    location.reload();
+                }
+            });
+        });
+    </script>
+}
