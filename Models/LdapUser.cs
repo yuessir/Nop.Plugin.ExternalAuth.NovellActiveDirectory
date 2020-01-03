@@ -26,8 +26,6 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [NotMapped]
-        public DateTime PasswordExpiredDate { get; set; }
 
         [NotMapped]
         public string Name { get; set; }

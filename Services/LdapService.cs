@@ -19,7 +19,7 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Services
         {
             "objectSid", "objectGUID", "objectCategory", "objectClass", "memberOf", "name", "cn", "distinguishedName",
             "sAMAccountName", "sAMAccountName", "userPrincipalName", "displayName", "givenName", "sn", "description",
-            "telephoneNumber", "mail", "streetAddress", "postalCode", "l", "st", "co", "c","msDS-UserPasswordExpiryTimeComputed"
+            "telephoneNumber", "mail", "streetAddress", "postalCode", "l", "st", "co", "c"
         };
 
         public LdapService(NovellActiveDirectoryExternalAuthSettings ldapSettings)
@@ -375,7 +375,7 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Services
                     CountryName = attributeSet.GetAttribute("co")?.StringValue,
                     CountryCode = attributeSet.GetAttribute("c")?.StringValue
                 },
-                PasswordExpiredDate = GetPasswordExpiredDate(attributeSet.GetAttribute("msDS-UserPasswordExpiryTimeComputed")?.StringValue),
+            
                 SamAccountType = int.Parse(attributeSet.GetAttribute("sAMAccountType")?.StringValue ?? "0")
             };
           

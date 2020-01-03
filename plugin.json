@@ -2,7 +2,7 @@
   "Group": "ExternalAuth methods",
   "FriendlyName": "Active Directory authentication",
   "SystemName": "ExternalAuth.NovellActiveDirectory",
-  "Version": "2.00",
+  "Version": "2.10",
   "SupportedVersions": [ "4.20" ],
   "Author": "yuessir",
   "DisplayOrder": 5,
