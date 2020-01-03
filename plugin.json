@@ -1,7 +1,7 @@
 ﻿{
   "Group": "ExternalAuth methods",
   "FriendlyName": "Active Directory authentication",
-  "SystemName": "ExternalAuth.NovellActiveDirectory",
+  "SystemName": "Nop.Plugin.ExternalAuth.NovellActiveDirectory",
   "Version": "2.10",
   "SupportedVersions": [ "4.20" ],
   "Author": "yuessir",
