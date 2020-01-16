@@ -1,11 +1,11 @@
 ﻿{
   "Group": "ExternalAuth methods",
   "FriendlyName": "Active Directory authentication",
-  "SystemName": "Nop.Plugin.ExternalAuth.NovellActiveDirectory",
-  "Version": "2.10",
+  "SystemName": "ExternalAuth.NovellActiveDirectory",
+  "Version": "2.2",
   "SupportedVersions": [ "4.20" ],
   "Author": "yuessir",
   "DisplayOrder": 5,
-  "FileName": "Nop.Plugin.ExternalAuth.NovellActiveDirectory.dll",
+  "FileName": "ExternalAuth.NovellActiveDirectory.dll",
   "Description": "This plugin enables LDAP(active directory) authentication."
 }
