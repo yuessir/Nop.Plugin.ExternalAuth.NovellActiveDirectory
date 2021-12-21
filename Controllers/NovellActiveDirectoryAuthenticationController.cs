@@ -14,7 +14,6 @@ using Nop.Services.Security;
 using Nop.Web.Framework.Controllers;
 using Nop.Web.Framework.Mvc.Filters;
 using System;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Nop.Plugin.ExternalAuth.NovellActiveDirectory.Models;
 using Nop.Plugin.ExternalAuth.NovellActiveDirectory.Services;
 using Nop.Services.Stores;
@@ -33,19 +32,9 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Controllers
 
 		private readonly ISettingService _settingService;
 
-		private readonly ICustomerService _customerService;
-
-		private readonly IAuthenticationService _authenticationService;
-
-		private readonly IShoppingCartService _shoppingCartService;
-
 		private readonly IWorkContext _workContext;
 
-		private readonly IEventPublisher _eventPublisher;
-
 		private readonly ICustomerActivityService _customerActivityService;
-
-		private readonly IStaticCacheManager _cacheManager;
 
         private readonly INotificationService _notificationService;
 
@@ -64,13 +53,8 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Controllers
 			_localizationService = localizationService;
 			_permissionService = permissionService;
 			_settingService = settingService;
-			_customerService = customerService;
-			_authenticationService = authenticationService;
-			_shoppingCartService = shoppingCartService;
 			_workContext = workContext;
-			_eventPublisher = eventPublisher;
 			_customerActivityService = customerActivityService;
-			_cacheManager = cacheManager;
             _notificationService = notificationService;
             _ldapService = ldapService;
             _storeService = storeService;
@@ -107,7 +91,6 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Controllers
 		}
 
 		[HttpPost]
-		[AdminAntiForgery(false)]
 		[AuthorizeAdmin(false)]
 		[Area("Admin")]
 		public IActionResult Configure(ConfigurationNovellModel novellModel)
@@ -132,10 +115,9 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Controllers
             _novellActiveDirectoryExternalAuthSettings.DomainDistinguishedName = novellModel.DomainDistinguishedName;
             _novellActiveDirectoryExternalAuthSettings.LdapServerPort = novellModel.LdapServerPort;
             _novellActiveDirectoryExternalAuthSettings.UseSSL = novellModel.UseSSL;
-            int num = (this._storeService.GetAllStores(true).Count > 1) ? activeStoreScopeConfiguration : 0;
+            int num = (_storeService.GetAllStores().Count > 1) ? activeStoreScopeConfiguration : 0;
             _settingService.SaveSetting<NovellActiveDirectoryExternalAuthSettings>(_novellActiveDirectoryExternalAuthSettings, num);
             _settingService.ClearCache();
-            //_cacheManager.Clear();
             this._customerActivityService.InsertActivity("EditNovellActiveDirectoryExternalAuthSettings", "Edit Novell Active Directory External Auth Settings", null);
             _notificationService.SuccessNotification(_localizationService.GetResource("Admin.Plugins.Saved"));
 

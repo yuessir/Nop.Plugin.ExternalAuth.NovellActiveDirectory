@@ -9,11 +9,9 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Components
 	{
 		public IViewComponentResult Invoke()
 		{
-			return this.View("~/Plugins/ExternalAuth.NovellActiveDirectory/Views/PublicInfo.cshtml",new SignInViewModel());
+			return View("~/Plugins/ExternalAuth.NovellActiveDirectory/Views/PublicInfo.cshtml",new SignInViewModel());
 		}
 
-		public ActiveDirectoryViewComponent()
-		{
-		}
+	
 	}
 }

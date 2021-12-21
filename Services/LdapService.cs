@@ -7,7 +7,6 @@ using System.Text;
 using Nop.Plugin.ExternalAuth.NovellActiveDirectory.Extensions;
 using Nop.Plugin.ExternalAuth.NovellActiveDirectory.Models;
 using Novell.Directory.Ldap;
-using LdapEntry = Nop.Plugin.ExternalAuth.NovellActiveDirectory.Models.LdapEntry;
 
 namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Services
 {
@@ -33,10 +32,10 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Services
             var ldapConnection = new LdapConnection() { SecureSocketLayer = this._ldapSettings.UseSSL };
 
             //Connect function will create a socket connection to the server - Port 389 for insecure and 3269 (adata) for secure    
-            ldapConnection.Connect(this._ldapSettings.LdapPath,Convert.ToInt32(this._ldapSettings.LdapServerPort));
+            ldapConnection.Connect(this._ldapSettings.LdapPath, Convert.ToInt32(this._ldapSettings.LdapServerPort));
             //Bind function with null user dn and password value will perform anonymous bind to LDAP server 
             ldapConnection.Bind(this._ldapSettings.LdapUsername, this._ldapSettings.LdapPassword);
-         
+
             return ldapConnection;
         }
 
@@ -71,7 +70,7 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Services
                         groups.Add(child);
                     }
                 }
-              
+
             }
 
             return groups;
@@ -127,7 +126,7 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Services
                     users.Add(this.CreateUserFromAttributes(this._ldapSettings.SearchBase,
                         entry.GetAttributeSet()));
                 }
-               
+
             }
 
             return users;
@@ -137,7 +136,7 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Services
         {
             LdapUser user = null;
 
-           var filter = $"(&(objectClass=user)(name={userName}))";
+            var filter = $"(&(objectClass=user)(name={userName}))";
             using (var ldapConnection = this.GetConnection())
             {
                 var search = ldapConnection.Search(
@@ -156,7 +155,7 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Services
                         user = this.CreateUserFromAttributes(this._ldapSettings.SearchBase, entry.GetAttributeSet());
                     }
                 }
-               
+
             }
 
             return user;
@@ -229,7 +228,7 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Services
             {
                 attributeSet.Add(new LdapAttribute("c", user.Address.CountryCode));
             }
-            
+
             var newEntry = new Novell.Directory.Ldap.LdapEntry(dn, attributeSet);
 
             using (var ldapConnection = this.GetConnection())
@@ -251,7 +250,7 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Services
         {
             using (var ldapConnection = new LdapConnection() { SecureSocketLayer = true })
             {
-                ldapConnection.Connect(this._ldapSettings.LdapPath,Convert.ToInt32(this._ldapSettings.LdapServerPort));
+                ldapConnection.Connect(this._ldapSettings.LdapPath, Convert.ToInt32(this._ldapSettings.LdapServerPort));
 
                 try
                 {
@@ -338,7 +337,7 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Services
                         }
                     }
                 }
-            
+
             }
 
             return allChildren;
@@ -375,21 +374,21 @@ namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Services
                     CountryName = attributeSet.GetAttribute("co")?.StringValue,
                     CountryCode = attributeSet.GetAttribute("c")?.StringValue
                 },
-            
+
                 SamAccountType = int.Parse(attributeSet.GetAttribute("sAMAccountType")?.StringValue ?? "0")
             };
-          
+
             return ldapUser;
         }
 
         private DateTime GetPasswordExpiredDate(string stringValue)
         {
-            if (long.TryParse(stringValue,out long tickValue))
+            if (long.TryParse(stringValue, out long tickValue))
             {
                 return DateTime.FromFileTime(tickValue);
             }
             return new DateTime();
-            
+
         }
 
         private Models.LdapEntry CreateEntryFromAttributes(string distinguishedName, LdapAttributeSet attributeSet)

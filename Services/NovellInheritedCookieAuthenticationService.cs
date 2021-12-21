@@ -3,7 +3,6 @@ using Nop.Core.Domain.Customers;
 using Nop.Core.Http.Extensions;
 using Nop.Services.Authentication;
 using Nop.Services.Customers;
-using SessionExtensions = Nop.Core.Http.Extensions.SessionExtensions;
 
 namespace Nop.Plugin.ExternalAuth.NovellActiveDirectory.Services
 {
